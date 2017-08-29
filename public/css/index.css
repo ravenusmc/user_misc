@@ -49,3 +49,28 @@ input, textarea {
   display: block;
   margin-bottom: 1em;
 }
+
+/* CSS for Sign Up Page */ 
+.main_sign_up {
+  background-image: url(https://source.unsplash.com/0ZOtNzDVUZg);
+  height: 94%;
+  background-repeat: none;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign_up_form {
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+
+
+
+
