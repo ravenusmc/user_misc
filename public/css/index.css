@@ -1,0 +1,51 @@
+/* Generic HTML for whole page */
+body, html {
+  height: 100%;
+}
+
+button {
+  background-color: green;
+  border-color: green;
+  padding: 10px;
+  color: white;
+}
+
+/* CSS for index page */
+
+.main_landing {
+  background-image: url(https://source.unsplash.com/AJCNM8JrzT8);
+  height: 94%;
+  background-repeat: none;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_container {
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.login_button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  float: left;
+  font-weight: bold;
+  display: block;
+  width: 6em;
+  padding-right: 1em;
+}
+
+input, textarea {
+  display: block;
+  margin-bottom: 1em;
+}
