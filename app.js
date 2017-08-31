@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 mongoose.connect('mongodb://localhost/user_misc');
 let db = mongoose.connection;
@@ -30,9 +33,44 @@ app.use(bodyParser.json())
 //Setting up public folder 
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Express session middleware
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
+
+//express messages middleware
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
+//Express validation middleware
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
 //This route will take the user to the home page.
 app.get('/', function(req, res){
-  res.render('index');
+  let errors = null;
+  res.render('index', {
+    errors: errors
+  });
 }); 
 
 //This route will log the user in. 
@@ -48,11 +86,27 @@ app.post('/', function(req, res){
 
 //This route take the user to the sign up page. 
 app.get('/sign_up', function(req, res){
-  res.render('sign_up');
+  let errors = null;
+  res.render('sign_up', {
+    errors: errors
+  });
 })
 
 app.post('/sign_up', function(req, res){
 
+  req.checkBody('name', 'Name is required').notEmpty();
+  req.checkBody('username', 'username is required').notEmpty();
+  req.checkBody('email', 'email is required').notEmpty();
+  req.checkBody('password', 'password is required').notEmpty();
+
+  //Get the Errors 
+  let errors = req.validationErrors();
+
+  if (errors){
+    res.render('/', {
+      errors: errors
+    });
+  }else {
   let newUser = new User();
 
   newUser.name = req.body.name;
@@ -66,10 +120,11 @@ app.post('/sign_up', function(req, res){
       console.log(err);
       return;
     }else {
+      req.flash('success', 'User Added! You may now sign in!');
       res.redirect('/');
     }
-  });
-
+    });
+  }
 });
 
 //Code to start server
