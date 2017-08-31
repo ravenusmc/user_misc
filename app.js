@@ -43,6 +43,18 @@ app.get('/sign_up', function(req, res){
   res.render('sign_up');
 })
 
+app.post('/sign_up', function(req, res){
+  const name = req.body.name;
+  const username = req.body.username; 
+  const email = req.body.email;
+  const password = req.body.password;
+
+  console.log(name);
+  console.log(username);
+  console.log(email);
+  console.log(password);
+})
+
 //Code to start server
 app.listen(3000, function(){
   console.log('Server Started, check port 3000');
