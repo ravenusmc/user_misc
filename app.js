@@ -33,6 +33,7 @@ app.use(bodyParser.json())
 //Setting up public folder 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 //Express session middleware
 app.use(session({
   secret: 'keyboard cat',
@@ -76,11 +77,22 @@ app.get('/', function(req, res){
 //This route will log the user in. 
 app.post('/', function(req, res){
 
+  req.checkBody('username', 'Username is required').notEmpty();
+  req.checkBody('password', 'Password is required').notEmpty();
+
   const username = req.body.username;
   const password = req.body.password;
 
-  console.log(username);
-  console.log(password);
+  //Get the Errors 
+  let errors = req.validationErrors();
+
+  if (errors){
+    res.render('index', {
+      errors: errors
+    });
+  }else {
+    res.render('home')
+  }
 
 });
 
@@ -103,28 +115,28 @@ app.post('/sign_up', function(req, res){
   let errors = req.validationErrors();
 
   if (errors){
-    res.render('/', {
+    res.render('sign_up', {
       errors: errors
     });
   }else {
-  let newUser = new User();
+    let newUser = new User();
 
-  newUser.name = req.body.name;
-  newUser.username = req.body.username; 
-  newUser.email = req.body.email;
-  newUser.password = req.body.password;
-  // newUser. = req.body.password2;
+    newUser.name = req.body.name;
+    newUser.username = req.body.username; 
+    newUser.email = req.body.email;
+    newUser.password = req.body.password;
+    // newUser. = req.body.password2;
 
-  newUser.save(function(err){
-    if (err){
-      console.log(err);
-      return;
-    }else {
-      req.flash('success', 'User Added! You may now sign in!');
-      res.redirect('/');
+    newUser.save(function(err){
+      if (err){
+        console.log(err);
+        return;
+      }else {
+        req.flash('success', 'User Added! You may now sign in!');
+        res.redirect('/');
+      }
+      });
     }
-    });
-  }
 });
 
 //Code to start server
