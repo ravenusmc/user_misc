@@ -6,6 +6,14 @@ const bodyParser = require('body-parser');
 mongoose.connect('mongodb://localhost/user_misc');
 let db = mongoose.connection;
 
+//checking db connection
+db.once('open', function(){
+  console.log('Connected to mongo DB')
+})
+
+//Bringing in the user model
+let User = require('./models/user');
+
 const app = express();
 
 //Setting up the view engine 
@@ -44,16 +52,25 @@ app.get('/sign_up', function(req, res){
 })
 
 app.post('/sign_up', function(req, res){
-  const name = req.body.name;
-  const username = req.body.username; 
-  const email = req.body.email;
-  const password = req.body.password;
 
-  console.log(name);
-  console.log(username);
-  console.log(email);
-  console.log(password);
-})
+  let newUser = new User();
+
+  newUser.name = req.body.name;
+  newUser.username = req.body.username; 
+  newUser.email = req.body.email;
+  newUser.password = req.body.password;
+  // newUser. = req.body.password2;
+
+  newUser.save(function(err){
+    if (err){
+      console.log(err);
+      return;
+    }else {
+      res.redirect('/');
+    }
+  });
+
+});
 
 //Code to start server
 app.listen(3000, function(){
