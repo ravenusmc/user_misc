@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
+const bcrypt  = require('bcryptjs');
 
 mongoose.connect('mongodb://localhost/user_misc');
 let db = mongoose.connection;
@@ -68,7 +69,9 @@ app.use(expressValidator({
 
 //This route will take the user to the home page.
 app.get('/', function(req, res){
+
   let errors = null;
+
   res.render('index', {
     errors: errors
   });
@@ -106,38 +109,89 @@ app.get('/sign_up', function(req, res){
 
 app.post('/sign_up', function(req, res){
 
+  const name = req.body.name;
+  const email = req.body.email;
+  const username = req.body.username;
+  const password = req.body.password;
+  const password2 = req.body.password2;
+
   req.checkBody('name', 'Name is required').notEmpty();
   req.checkBody('username', 'username is required').notEmpty();
   req.checkBody('email', 'email is required').notEmpty();
+  req.checkBody('email', 'email is not valid').isEmail();
   req.checkBody('password', 'password is required').notEmpty();
+  req.checkBody('password2', 'passwords do not match').equals(req.body.password);
 
-  //Get the Errors 
   let errors = req.validationErrors();
 
   if (errors){
-    res.render('sign_up', {
+    res.render('sign_up',{
       errors: errors
     });
   }else {
-    let newUser = new User();
 
-    newUser.name = req.body.name;
-    newUser.username = req.body.username; 
-    newUser.email = req.body.email;
-    newUser.password = req.body.password;
-    // newUser. = req.body.password2;
+    let newUser = new User({
 
-    newUser.save(function(err){
-      if (err){
-        console.log(err);
-        return;
-      }else {
-        req.flash('success', 'User Added! You may now sign in!');
-        res.redirect('/');
-      }
+      name:name,
+      email:email,
+      username:username,
+      password:password
+    });
+    bcrypt.genSalt(10, function(err, salt){
+      bcrypt.hash(newUser.password, salt, function(err, hash){
+        if(err){
+          console.log(err);
+        }
+        newUser.password = hash
+        newUser.save(function(){
+          if (err){
+            console.log(err);
+            return;
+          }else{
+            req.flash('Success', 'You are now registered! Log In!')
+            res.redirect('/');
+          }
+        });
       });
-    }
+    });
+  }
 });
+
+//This route handles the user signing in
+// app.post('/sign_up', function(req, res){
+
+//   req.checkBody('name', 'Name is required').notEmpty();
+//   req.checkBody('username', 'username is required').notEmpty();
+//   req.checkBody('email', 'email is required').notEmpty();
+//   req.checkBody('password', 'password is required').notEmpty();
+
+//   //Get the Errors 
+//   let errors = req.validationErrors();
+
+//   if (errors){
+//     res.render('sign_up', {
+//       errors: errors
+//     });
+//   }else {
+//     let newUser = new User();
+
+//     newUser.name = req.body.name;
+//     newUser.username = req.body.username; 
+//     newUser.email = req.body.email;
+//     newUser.password = req.body.password;
+//     // newUser. = req.body.password2;
+
+//     newUser.save(function(err){
+//       if (err){
+//         console.log(err);
+//         return;
+//       }else {
+//         req.flash('success', 'User Added! You may now sign in!');
+//         res.redirect('/');
+//       }
+//       });
+//     }
+// });
 
 //Code to start server
 app.listen(3000, function(){
