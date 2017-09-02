@@ -165,9 +165,17 @@ app.post('/sign_up', function(req, res){
 });
 
 
+// https://api.nasa.gov/planetary/earth/imagery?lon=-83.968060&lat=34.089791&date=2017-02-01&cloud_score=True&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t
+
 //This will take the user to the home screen. 
 app.get('/home', ensureAuthenticated,  function(req,res){
+
+  let api = "https://api.nasa.gov/planetary/earth/imagery?lon=-83.968060&lat=34.089791&date=2017-02-01&cloud_score=True&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t";
+
+  console.log(api);
+
   let errors = null;
+
   res.render('home', {
     errors: errors
   });
