@@ -166,7 +166,7 @@ app.post('/sign_up', function(req, res){
 
 
 //This will take the user to the home screen. 
-app.get('/home', function(req,res){
+app.get('/home', ensureAuthenticated,  function(req,res){
   let errors = null;
   res.render('home', {
     errors: errors
@@ -179,6 +179,17 @@ app.get('/logout', function(req, res){
   req.flash('success', "You are logged out");
   res.redirect('/');
 })
+
+//Access control 
+function ensureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+
+  }else {
+    req.flash('danger', 'Please login');
+    res.redirect('/');
+  }
+}
 
 //Code to start server
 app.listen(3000, function(){
