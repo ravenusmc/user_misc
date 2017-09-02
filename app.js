@@ -6,8 +6,10 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const bcrypt  = require('bcryptjs');
+const config = require('./config/database');
+const passport = require('passport');
 
-mongoose.connect('mongodb://localhost/user_misc');
+mongoose.connect(config.database);
 let db = mongoose.connection;
 
 //checking db connection
@@ -67,35 +69,39 @@ app.use(expressValidator({
   }
 }));
 
+//passport config
+require('./config/passport')(passport);
+
+//Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Global passport route
+app.get('*', function(req,res,next){
+  res.locals.user = req.user || null;
+  next();
+});
+
+
 //This route will take the user to the home page.
 app.get('/', function(req, res){
 
   let errors = null;
-
+  
   res.render('index', {
     errors: errors
   });
 }); 
 
 //This route will log the user in. 
-app.post('/', function(req, res){
+app.post('/', function(req, res, next){
 
-  req.checkBody('username', 'Username is required').notEmpty();
-  req.checkBody('password', 'Password is required').notEmpty();
-
-  const username = req.body.username;
-  const password = req.body.password;
-
-  //Get the Errors 
-  let errors = req.validationErrors();
-
-  if (errors){
-    res.render('index', {
-      errors: errors
-    });
-  }else {
-    res.render('home')
-  }
+  //Using passport to have the user login.
+  passport.authenticate('local', {
+    successRedirect: 'home',
+    failureRedirect: '/',
+    failureFlash: true
+  })(req, res, next);
 
 });
 
@@ -105,8 +111,9 @@ app.get('/sign_up', function(req, res){
   res.render('sign_up', {
     errors: errors
   });
-})
+});
 
+//This post route will take care of adding a new user to the database.
 app.post('/sign_up', function(req, res){
 
   const name = req.body.name;
@@ -157,41 +164,21 @@ app.post('/sign_up', function(req, res){
   }
 });
 
-//This route handles the user signing in
-// app.post('/sign_up', function(req, res){
 
-//   req.checkBody('name', 'Name is required').notEmpty();
-//   req.checkBody('username', 'username is required').notEmpty();
-//   req.checkBody('email', 'email is required').notEmpty();
-//   req.checkBody('password', 'password is required').notEmpty();
+//This will take the user to the home screen. 
+app.get('/home', function(req,res){
+  let errors = null;
+  res.render('home', {
+    errors: errors
+  });
+});
 
-//   //Get the Errors 
-//   let errors = req.validationErrors();
-
-//   if (errors){
-//     res.render('sign_up', {
-//       errors: errors
-//     });
-//   }else {
-//     let newUser = new User();
-
-//     newUser.name = req.body.name;
-//     newUser.username = req.body.username; 
-//     newUser.email = req.body.email;
-//     newUser.password = req.body.password;
-//     // newUser. = req.body.password2;
-
-//     newUser.save(function(err){
-//       if (err){
-//         console.log(err);
-//         return;
-//       }else {
-//         req.flash('success', 'User Added! You may now sign in!');
-//         res.redirect('/');
-//       }
-//       });
-//     }
-// });
+//This is code for the logout process
+app.get('/logout', function(req, res){
+  req.logout();
+  req.flash('success', "You are logged out");
+  res.redirect('/');
+})
 
 //Code to start server
 app.listen(3000, function(){
