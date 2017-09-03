@@ -1,22 +1,33 @@
 <% include partials/header %>
 
-<section>
-  <h1>Home page</h1>
+<!-- The code here will be for the title section of the page -->
+<section class='main_title'>
+  <div class='heading_container'>
+    <h1>Satellite Image</h1>
+  </div>
 </section>
 
-<div>
-  <h3> Enter an adress and press the button</h3>
-  <input id="address" type="text" placeholder="Enter address here" />
-    <button id="btn">Get LatLong</button>
-    <div>
-        <p>Latitude:
-            <input type="text" id="latitude" readonly />
-        </p>
-        <p>Longitude:
-            <input type="text" id="longitude" readonly />
-        </p>
-    </div>
-</div>
+
+
+<!-- Code for the main section of the page --> 
+<main class='home_main_section'>
+  <div>
+    <h3> Enter an adress and press the button</h3>
+    <input id="address" type="text" placeholder="Enter address here" />
+      <button id="btn">Submit</button>
+  </div>
+</main> 
+<!-- End Main Section --> 
 
 
 <% include partials/footer %>
+
+
+<!--       <div>
+          <p>Latitude:
+              <input type="text" id="latitude" readonly />
+          </p>
+          <p>Longitude:
+              <input type="text" id="longitude" readonly />
+          </p>
+      </div> -->

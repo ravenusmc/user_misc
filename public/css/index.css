@@ -81,6 +81,30 @@ input, textarea {
   align-items: center;
 }
 
+/* CSS for Home page */ 
+.main_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(https://source.unsplash.com/VBNb52J8Trk);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 65%;
+}
+
+.heading_container {
+  background-color: rgba(0,0,0,0.7);
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+}
+
+.home_main_section {
+  border: 2px solid red;
+}
+
 
 
 

@@ -5,17 +5,37 @@ let latValue = null;
 let longValue = null;
 
 
+function getJSON(latValue, longValue){
+
+    //Setting up to get the API request
+    let xhr = new XMLHttpRequest();
+    //This line will go out to the specific site that I'm requesting based on the longitude and latitude values
+    xhr.open("GET", "https://api.nasa.gov/planetary/earth/imagery?lon=" + longValue + "&lat=" + latValue + "&date=2017-02-01&cloud_score=True&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", false);
+    xhr.send();
+    //Setting up a variable to hold the response
+    let response = xhr.response
+    //Setting up the response to be parsed by Javascript code. 
+    let myData = JSON.parse(response);
+    //returning the parsed data
+    return myData
+}
+
+
 //This function gets the latitude and longitude coordinates. 
 function getValues(result) {
     latValue = result.geometry.location.lat();
     longValue = result.geometry.location.lng();
 
-    let xhr = new XMLHttpRequest();
+    let data = getJSON(latValue, longValue);
 
-    xhr.open("GET", "https://api.nasa.gov/planetary/earth/imagery?lon=" + longValue + "&lat=" + latValue + "&date=2017-02-01&cloud_score=True&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", false);
-    xhr.send();
-    let response = xhr.response
-    let myData = JSON.parse(response);
+    console.log(data.url);
+    
+    //let xhr = new XMLHttpRequest();
+
+    //xhr.open("GET", "https://api.nasa.gov/planetary/earth/imagery?lon=" + longValue + "&lat=" + latValue + "&date=2017-02-01&cloud_score=True&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", false);
+    //xhr.send();
+    //let response = xhr.response
+    //let myData = JSON.parse(response);
    
 }
 
