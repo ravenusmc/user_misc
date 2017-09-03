@@ -9,6 +9,8 @@ const bcrypt  = require('bcryptjs');
 const config = require('./config/database');
 const passport = require('passport');
 
+const geoTest = require('./modules/test');
+
 mongoose.connect(config.database);
 let db = mongoose.connection;
 
@@ -164,7 +166,6 @@ app.post('/sign_up', function(req, res){
   }
 });
 
-
 // https://api.nasa.gov/planetary/earth/imagery?lon=-83.968060&lat=34.089791&date=2017-02-01&cloud_score=True&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t
 
 //This will take the user to the home screen. 
@@ -172,7 +173,7 @@ app.get('/home', ensureAuthenticated,  function(req,res){
 
   let api = "https://api.nasa.gov/planetary/earth/imagery?lon=-83.968060&lat=34.089791&date=2017-02-01&cloud_score=True&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t";
 
-  console.log(api);
+  // value = geoTest.test();
 
   let errors = null;
 

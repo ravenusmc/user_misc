@@ -1,3 +1,22 @@
 <% include partials/header %>
 
-<h1>Home page</h1>
+<section>
+  <h1>Home page</h1>
+</section>
+
+<div>
+  <h3> Enter an adress and press the button</h3>
+  <input id="address" type="text" placeholder="Enter address here" />
+    <button id="btn">Get LatLong</button>
+    <div>
+        <p>Latitude:
+            <input type="text" id="latitude" readonly />
+        </p>
+        <p>Longitude:
+            <input type="text" id="longitude" readonly />
+        </p>
+    </div>
+</div>
+
+
+<% include partials/footer %>
