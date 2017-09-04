@@ -65,14 +65,6 @@ button.addEventListener("click", function () {
     getLatitudeLongitude(getValues, address)
 });
 
-  //Need to get the user to enter the address in the form 
-
-  //convert the address to lat longitude coordinates
-
-  //take the coordinates and put them into the NASA API.
-
-
-
 
 ////// SCRAP CODE ////////
 
