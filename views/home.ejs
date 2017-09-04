@@ -3,7 +3,7 @@
 <!-- The code here will be for the title section of the page -->
 <section class='main_title'>
   <div class='heading_container'>
-    <h1>Satellite Image</h1>
+    <h1>Satellite Image App</h1>
   </div>
 </section>
 
@@ -14,13 +14,15 @@
 
   <div class='form_container'>
     <h3> Enter an address:</h3>
+    <h6>(The bad image quality is NASA's fault)</h6>
     <input id="address" type="text" size=35 placeholder="Enter address here" />
       <button class='addressButton' id="btn">Submit</button>
   </div>
 
   <div class='image_container'>
     <h3>Image area</h3>
-    <img class='image' id='image' src="https://source.unsplash.com/VBNb52J8Trk">
+    <h6>An image of your address will appear here</h6>
+    <img class='image' id='image' src="https://source.unsplash.com/yZygONrUBe8">
   </div>
 
 </main> 
@@ -28,13 +30,3 @@
 
 
 <% include partials/footer %>
-
-
-<!--       <div>
-          <p>Latitude:
-              <input type="text" id="latitude" readonly />
-          </p>
-          <p>Longitude:
-              <input type="text" id="longitude" readonly />
-          </p>
-      </div> -->

@@ -1,10 +1,9 @@
-
-
 //Setting up global values for the page. 
 let latValue = null;
 let longValue = null;
+let button = document.getElementById('btn');
 
-
+//This function will get the JSON data from the NASA API using the lat and long coordinates
 function getJSON(latValue, longValue){
 
     //Setting up to get the API request
@@ -28,20 +27,14 @@ function getValues(result) {
 
     let data = getJSON(latValue, longValue);
 
-    console.log(data.url);
-    
-    //let xhr = new XMLHttpRequest();
+    //Below line was used only for reference
+    //console.log(data.url);
 
-    //xhr.open("GET", "https://api.nasa.gov/planetary/earth/imagery?lon=" + longValue + "&lat=" + latValue + "&date=2017-02-01&cloud_score=True&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", false);
-    //xhr.send();
-    //let response = xhr.response
-    //let myData = JSON.parse(response);
-   
+    document.getElementById("image").setAttribute("src", data.url);
 }
 
-//    2460 Chandler Grove Dr
 
-
+//This function gets the lat and long coordinates from Google based on the address the user typed in. 
 function getLatitudeLongitude(callback, address) {
     // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
     address = address || 'Ferrol, Galicia, Spain';
@@ -58,8 +51,7 @@ function getLatitudeLongitude(callback, address) {
     }
 }
 
-var button = document.getElementById('btn');
-
+//This is an event listener which will fire once the user hits the orange submit button.
 button.addEventListener("click", function () {
     var address = document.getElementById('address').value;
     getLatitudeLongitude(getValues, address)
