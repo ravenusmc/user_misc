@@ -58,14 +58,7 @@ button.addEventListener("click", function () {
 });
 
 
-////// SCRAP CODE ////////
 
-// function showResult(result) {
-//     latValue = result.geometry.location.lat();
-//     alert(latValue);
-//     document.getElementById('latitude').value = result.geometry.location.lat();
-//     document.getElementById('longitude').value = result.geometry.location.lng();
 
-// }
 
- //let api = "https://api.nasa.gov/planetary/earth/imagery?lon=-83.968060&lat=34.089791&date=2017-02-01&cloud_score=True&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t";
+
