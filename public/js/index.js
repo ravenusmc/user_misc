@@ -19,7 +19,6 @@ function getJSON(latValue, longValue){
     return myData
 }
 
-
 //This function gets the latitude and longitude coordinates. 
 function getValues(result) {
     latValue = result.geometry.location.lat();
@@ -30,6 +29,7 @@ function getValues(result) {
     //Below line was used only for reference
     //console.log(data.url);
 
+    //Here I place the image that is retrieved into the browswer. 
     document.getElementById("image").setAttribute("src", data.url);
 }
 

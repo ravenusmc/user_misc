@@ -147,7 +147,16 @@ input, textarea {
 
 .image_title {
   margin-top: 50px;
+  margin-bottom: 25px;
 }
+
+.main_image_picture {
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  margin-bottom: 75px;
+}
+
 
 
 
