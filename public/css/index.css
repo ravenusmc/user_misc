@@ -135,6 +135,20 @@ input, textarea {
   border: #e29a09;
 }
 
+/* CSS for image page */
+
+.image_page {
+  background-image: url(https://source.unsplash.com/1lfI7wkGWZ4);
+  height: 85%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.image_title {
+  margin-top: 50px;
+}
+
 
 
 
