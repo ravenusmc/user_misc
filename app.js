@@ -190,7 +190,7 @@ app.get('/image', ensureAuthenticated, function(req, res){
 });
 
 //This route will take the user to the astroid page
-app.get('/astroid', ensureAuthenticated, function(req, res){
+app.get('/asteroid', ensureAuthenticated, function(req, res){
 
   let errors = null;
 

@@ -157,6 +157,15 @@ input, textarea {
   margin-bottom: 75px;
 }
 
+/* Astroid Header Page */
+.astroid_header {
+  background-image: url(https://source.unsplash.com/ln5drpv_ImI);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 85%;
+}
+
 
 
 
