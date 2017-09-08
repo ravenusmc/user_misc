@@ -8,6 +8,7 @@ const session = require('express-session');
 const bcrypt  = require('bcryptjs');
 const config = require('./config/database');
 const passport = require('passport');
+const request = require('request');
 
 const geoTest = require('./modules/test');
 
@@ -193,6 +194,19 @@ app.get('/image', ensureAuthenticated, function(req, res){
 app.get('/asteroid', ensureAuthenticated, function(req, res){
 
   let errors = null;
+
+  request("https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", function(error, response, body){
+    if (!error && response.statusCode == 200){
+      console.log('Okay');
+    }
+  })
+
+  // let xhr = new XMLHttpRequest();
+  // xhr.open("GET", "https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", false);
+  // xhr.send();
+  // //Setting up a variable to hold the response
+  // let response = xhr.response;
+  // console.log(response);
 
   res.render('astroid', {
     errors: errors
