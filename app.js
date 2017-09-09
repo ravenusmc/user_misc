@@ -201,7 +201,19 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
       let parsedData = JSON.parse(body);
       totalBodies = parsedData.element_count;
       // console.log(parsedData.element_count);
-      console.log(totalBodies);
+      console.log(parsedData.near_earth_objects);
+
+      let rightNow = new Date();
+
+      rightNow = rightNow.toISOString().slice(0,10);
+      rightNow = rightNow.split("-")
+      //Have to get the second index in the array 
+      //subtract one from that value
+      //put it back into array
+      //combine all the values back into the array. 
+      console.log(rightNow);
+
+      //rightNow is a string 
 
       res.render('astroid', {
         errors: errors,
