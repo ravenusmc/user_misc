@@ -194,10 +194,19 @@ app.get('/image', ensureAuthenticated, function(req, res){
 app.get('/asteroid', ensureAuthenticated, function(req, res){
 
   let errors = null;
+  let totalBodies = "";
 
   request("https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", function(error, response, body){
     if (!error && response.statusCode == 200){
-      console.log('Okay');
+      let parsedData = JSON.parse(body);
+      totalBodies = parsedData.element_count;
+      // console.log(parsedData.element_count);
+      console.log(totalBodies);
+
+      res.render('astroid', {
+        errors: errors,
+        bodies: totalBodies
+      });
     }
   })
 
@@ -208,9 +217,7 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
   // let response = xhr.response;
   // console.log(response);
 
-  res.render('astroid', {
-    errors: errors
-  });
+
 });
 
 //This is code for the logout process
