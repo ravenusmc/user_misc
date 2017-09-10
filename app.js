@@ -200,18 +200,25 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
     if (!error && response.statusCode == 200){
       let parsedData = JSON.parse(body);
       totalBodies = parsedData.element_count;
-      // console.log(parsedData.element_count);
-      console.log(parsedData.near_earth_objects);
+
+      //console.log(parsedData.near_earth_objects);
 
       let rightNow = new Date();
 
       rightNow = rightNow.toISOString().slice(0,10);
-      rightNow = rightNow.split("-")
-      //Have to get the second index in the array 
-      //subtract one from that value
-      //put it back into array
-      //combine all the values back into the array. 
-      console.log(rightNow);
+      rightNow = rightNow.split("-");
+      //Here I am taking the date, converting it to a Number, subtracting one 
+      //then turning it back into a string. 
+      newDay = (Number(rightNow[2]) - 1).toString();
+      //I combine 0 to the date because that is how the API has its data. 
+      newDay = '0' + newDay;
+      //I insert the modified date back into the array.
+      rightNow[2] = newDay;
+
+      //combine all the values back 
+      date = rightNow.join('-');
+
+      console.log(parsedData.near_earth_objects.date);
 
       //rightNow is a string 
 
