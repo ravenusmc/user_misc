@@ -196,46 +196,35 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
   let errors = null;
   let totalBodies = "";
 
-  request("https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", function(error, response, body){
+  //Getting the current date 
+  let currentDate = new Date();
+  //Turning the current date into yyyy-mm-dd format
+  currentDate = currentDate.toISOString().slice(0,10);
+
+  request("https://api.nasa.gov/neo/rest/v1/feed?start_date=" + currentDate + "&end_date=" + currentDate + "&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", function(error, response, body){
     if (!error && response.statusCode == 200){
+
+      //Parsing the data so that it may be read in JSON format. 
       let parsedData = JSON.parse(body);
-      totalBodies = parsedData.element_count;
+      //Getting the total number of near Earth Asteroids on the specific day. 
+      let totalBodies = parsedData.element_count;
 
-      //console.log(parsedData.near_earth_objects);
+      //Getting the current date-I know I did this above and repeating myself but the variable was 
+      //not carrying through so I had to do this again-frustrating!  
+      let currentDate = new Date();
+      //Turning the current date into yyyy-mm-dd format
+      currentDate = currentDate.toISOString().slice(0,10);
 
-      let rightNow = new Date();
+      console.log(parsedData.near_earth_objects[currentDate].length);
 
-      rightNow = rightNow.toISOString().slice(0,10);
-      rightNow = rightNow.split("-");
-      //Here I am taking the date, converting it to a Number, subtracting one 
-      //then turning it back into a string. 
-      newDay = (Number(rightNow[2]) - 1).toString();
-      //I combine 0 to the date because that is how the API has its data. 
-      newDay = '0' + newDay;
-      //I insert the modified date back into the array.
-      rightNow[2] = newDay;
-
-      //combine all the values back 
-      date = rightNow.join('-');
-
-      console.log(parsedData.near_earth_objects.date);
-
-      //rightNow is a string 
+      //Need to loop through the data to get the asteroids name and size and miss distance. 
 
       res.render('astroid', {
         errors: errors,
         bodies: totalBodies
       });
     }
-  })
-
-  // let xhr = new XMLHttpRequest();
-  // xhr.open("GET", "https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", false);
-  // xhr.send();
-  // //Setting up a variable to hold the response
-  // let response = xhr.response;
-  // console.log(response);
-
+  });
 
 });
 
@@ -261,3 +250,19 @@ function ensureAuthenticated(req, res, next){
 app.listen(3000, function(){
   console.log('Server Started, check port 3000');
 });
+
+
+// SCRAP CODE 
+
+  // let rightNow = new Date();
+  // rightNow = rightNow.toISOString().slice(0,10);
+  // rightNow = rightNow.split("-");
+  // //Here I am taking the date, converting it to a Number, subtracting one 
+  // //then turning it back into a string. 
+  // newDay = (Number(rightNow[2]) - 3).toString();
+  // //I combine 0 to the date because that is how the API has its data. 
+  // newDay = '0' + newDay;
+  // //I insert the modified date back into the array.
+  // rightNow[2] = newDay;
+  // //combine all the values back 
+  // date = rightNow.join('-');
