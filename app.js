@@ -215,9 +215,25 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
       //Turning the current date into yyyy-mm-dd format
       currentDate = currentDate.toISOString().slice(0,10);
 
-      console.log(parsedData.near_earth_objects[currentDate].length);
+      // console.log(parsedData.near_earth_objects[currentDate].length);
 
       //Need to loop through the data to get the asteroids name and size and miss distance. 
+
+      //This variable will hold the length of the json data.
+      dataLength = parsedData.near_earth_objects[currentDate].length;
+      let dataArray = [];
+
+      //Creating a for loop to loop through the data. 
+      for (var i = 0; i < dataLength; i++){
+        //These couple of lines will get the asteroid data that I want 
+        let size = parsedData.near_earth_objects[currentDate][i].estimated_diameter.meters.estimated_diameter_max;
+        let rockName = parsedData.near_earth_objects[currentDate][i].name;
+        let missDistance = parsedData.near_earth_objects[currentDate][i].close_approach_data[0].miss_distance.miles;
+        let speed =  parsedData.near_earth_objects[currentDate][i].close_approach_data[0].relative_velocity.miles_per_hour;
+        dataArray.push({size: size, name: rockName, missDistance: missDistance, speed: speed })
+      }
+
+      console.log(dataArray);
 
       res.render('astroid', {
         errors: errors,
