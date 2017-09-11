@@ -11,6 +11,7 @@ const passport = require('passport');
 const request = require('request');
 
 const geoTest = require('./modules/test');
+const asteroid = require('./modules/asteroid');
 
 mongoose.connect(config.database);
 let db = mongoose.connection;
@@ -171,7 +172,7 @@ app.post('/sign_up', function(req, res){
 
 //This will take the user to the home screen. 
 app.get('/home', ensureAuthenticated,  function(req,res){
-  //This is for 
+
   // value = geoTest.test();
   let errors = null;
 
@@ -225,19 +226,30 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
 
       //Creating a for loop to loop through the data. 
       for (var i = 0; i < dataLength; i++){
+
         //These couple of lines will get the asteroid data that I want 
         let size = parsedData.near_earth_objects[currentDate][i].estimated_diameter.meters.estimated_diameter_max;
         let rockName = parsedData.near_earth_objects[currentDate][i].name;
         let missDistance = parsedData.near_earth_objects[currentDate][i].close_approach_data[0].miss_distance.miles;
         let speed =  parsedData.near_earth_objects[currentDate][i].close_approach_data[0].relative_velocity.miles_per_hour;
-        dataArray.push({size: size, name: rockName, missDistance: missDistance, speed: speed })
+
+        //The following code will bring the numbers down to 2 numbers past the decimal point. 
+        size = asteroid.fixDecimal(size);
+
+        //I am adding decimal points to my values. 
+        size = asteroid.fixNumbers(size);
+        missDistance = asteroid.fixNumbers(missDistance);
+        speed = asteroid.fixNumbers(speed);
+
+        //I then push all of the variables into an array of objects to hold the data. 
+        dataArray.push({ rockSize: size, rockName: rockName, missDistance: missDistance, speed: speed });
       }
 
-      console.log(dataArray);
-
+      //Rendering the page along with the data. 
       res.render('astroid', {
         errors: errors,
-        bodies: totalBodies
+        bodies: totalBodies,
+        dataArray: dataArray
       });
     }
   });

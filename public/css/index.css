@@ -169,8 +169,24 @@ input, textarea {
 .asteroidMain {
   margin-top: 50px;
   margin-bottom: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
+span {
+  font-weight: bold;
+}
+
+.asteroid_main_div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1em;
+}
+
+.asteroid_data_container {
+  border: 2px solid red;
+  padding: 15px;
+}
 
 
 
