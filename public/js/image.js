@@ -10,6 +10,8 @@ function getImage(){
   //Setting up the response to be parsed by Javascript code. 
   let image = JSON.parse(response);
 
+  console.log(image); //It appears at this time that the image is not working check back later. 
+
   //Here I place the image that is retrieved into the browswer. 
   document.getElementById("dailyImage").setAttribute("src", image.url);
   console.log(image.hdurl);

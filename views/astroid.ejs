@@ -5,22 +5,23 @@
 </header>
 
 <main class='asteroidMain'>
+
   <h1 class='center'>Near Earth Asteroids, Oh My!</h1>
-  <h6 class='center'>(See Asteroids near Earth)</h6>
-  <p class='center'>The total number of near Earth bodies is: <%= bodies %></p>
+  <h6 class='center'>(See Asteroids near Earth)</h6><br>
+  <h3 class='center'>Today, on <%= date %>, the total number of near Earth bodies is: <%= bodies %></h3>
 
   <div class='asteroid_main_div'>
-  <% for (var i = 0; i < dataArray.length; i++) { %>
-      <div class='asteroid_data_container'>
-        <p><span>Asteroid's Name:</span> <%= dataArray[i].rockName %></p>
-        <p><span>Asteroid's Size:</span> <%= dataArray[i].rockSize %> Meters</p>
-        <p><span>Miss Distance: </span> <%= dataArray[i].missDistance %> Miles from Earth</p>
-        <p><span>Asteroid's Speed:</span> <%= dataArray[i].speed %> MPH</p>
-      </div>
-  <% } %>
+    <% for (var i = 0; i < dataArray.length; i++) { %>
+        <div onmouseover='changeColor();' id='single_div' class='asteroid_data_container'>
+          <p><span>Asteroid's Name:</span> <%= dataArray[i].rockName %></p>
+          <p><span>Asteroid's Size:</span> <%= dataArray[i].rockSize %> Meters</p>
+          <p><span>Miss Distance: </span> <%= dataArray[i].missDistance %> Miles from Earth</p>
+          <p><span>Asteroid's Speed:</span> <%= dataArray[i].speed %> MPH</p>
+        </div>
+    <% } %>
   </div>
 
 </main>
 
-<!-- <script type="text/javascript" src='/js/test.js'></script> -->
+<script type="text/javascript" src='/js/asteroid.js'></script>
 <% include partials/footer %>

@@ -194,10 +194,12 @@ app.get('/image', ensureAuthenticated, function(req, res){
 //This route will take the user to the astroid page
 app.get('/asteroid', ensureAuthenticated, function(req, res){
 
+  //Variables used within this function
   let errors = null;
-  let totalBodies = "";
+  let totalBodies = ""; //This variable will display the total number of bodies on the page
 
-  let currentDate = asteroid.getDate();
+  //This variable will hold the current date. 
+  let currentDate = asteroid.getDate(); 
 
   request("https://api.nasa.gov/neo/rest/v1/feed?start_date=" + currentDate + "&end_date=" + currentDate + "&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", function(error, response, body){
     if (!error && response.statusCode == 200){
@@ -240,7 +242,8 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
       res.render('astroid', {
         errors: errors,
         bodies: totalBodies,
-        dataArray: dataArray
+        dataArray: dataArray,
+        date: currentDate
       });
     }
   });
