@@ -197,10 +197,7 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
   let errors = null;
   let totalBodies = "";
 
-  //Getting the current date 
-  let currentDate = new Date();
-  //Turning the current date into yyyy-mm-dd format
-  currentDate = currentDate.toISOString().slice(0,10);
+  let currentDate = asteroid.getDate();
 
   request("https://api.nasa.gov/neo/rest/v1/feed?start_date=" + currentDate + "&end_date=" + currentDate + "&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", function(error, response, body){
     if (!error && response.statusCode == 200){
@@ -210,13 +207,7 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
       //Getting the total number of near Earth Asteroids on the specific day. 
       let totalBodies = parsedData.element_count;
 
-      //Getting the current date-I know I did this above and repeating myself but the variable was 
-      //not carrying through so I had to do this again-frustrating!  
-      let currentDate = new Date();
-      //Turning the current date into yyyy-mm-dd format
-      currentDate = currentDate.toISOString().slice(0,10);
-
-      // console.log(parsedData.near_earth_objects[currentDate].length);
+      currentDate = asteroid.getDate();
 
       //Need to loop through the data to get the asteroids name and size and miss distance. 
 
@@ -294,3 +285,8 @@ app.listen(3000, function(){
   // rightNow[2] = newDay;
   // //combine all the values back 
   // date = rightNow.join('-');
+
+    //Getting the current date 
+  //let currentDate = new Date();
+  //Turning the current date into yyyy-mm-dd format
+  //currentDate = currentDate.toISOString().slice(0,10);
