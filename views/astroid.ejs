@@ -12,7 +12,7 @@
 
   <div class='asteroid_main_div'>
     <% for (var i = 0; i < dataArray.length; i++) { %>
-        <div onmouseover='changeColor();' id='single_div' class='asteroid_data_container'>
+        <div style="background-color:lightgreen" id='single_div_<%= i %>' class='asteroid_data_container'>
           <p><span>Asteroid's Name:</span> <%= dataArray[i].rockName %></p>
           <p><span>Asteroid's Size:</span> <%= dataArray[i].rockSize %> Meters</p>
           <p><span>Miss Distance: </span> <%= dataArray[i].missDistance %> Miles from Earth</p>

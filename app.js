@@ -9,8 +9,6 @@ const bcrypt  = require('bcryptjs');
 const config = require('./config/database');
 const passport = require('passport');
 const request = require('request');
-
-const geoTest = require('./modules/test');
 const asteroid = require('./modules/asteroid');
 
 mongoose.connect(config.database);
