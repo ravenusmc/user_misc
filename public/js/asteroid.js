@@ -37,6 +37,12 @@ function test(){
     // (target.style.backgroundColor == "rgba(0,0,0, " + r_a + ")")
   });
 
+
+function tuna(that) {
+  console.log(that);
+  document.getElementById(that).setAttribute("style", "background-color: yellow;");
+}
+
   document.getElementById("single_div_1").addEventListener('click', function(){
     document.getElementById("single_div_1").setAttribute("style", "background-color: yellow;");
   });
