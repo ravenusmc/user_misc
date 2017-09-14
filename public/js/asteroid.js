@@ -1,4 +1,27 @@
-function test(){
+//This page will hold all of the JavaScript functions for the asteroid page. 
+
+//This function will toggle the colors from one color to another. 
+function colorSwitch(target) {
+  if (target.style.backgroundColor === 'lightgreen') {
+    target.style.backgroundColor = 'yellow'
+  }else if (target.style.backgroundColor === 'yellow')  {
+    target.style.backgroundColor = 'lightgreen';
+  }
+} 
+
+function test() {
+ // var children = document.getElementById('parent_div').childNodes;
+ // console.log(children[1].id);
+ debugger;
+  let target = document.querySelector('.asteroid_data_container').id;
+  console.log(target);
+ // onclick='test();'
+}
+
+
+//This function will be executed when the page loads and also has within it the event listener functions 
+//For when a user clicks. 
+function asteroidMain(){
 
   //Getting the current date 
   let currentDate = new Date();
@@ -16,35 +39,15 @@ function test(){
 
   dataLength = parsedData.near_earth_objects[currentDate].length;
 
-  //console.log(dataLength);
 
   document.getElementById("single_div_0").addEventListener('click', function(){
-
     let target = document.getElementById('single_div_0');
-
-    //console.log(target);
-
-    //let r_a = 0.3;
-
-    //debugger;
-    if (target.style.backgroundColor === 'lightgreen') {
-      target.style.backgroundColor = 'yellow'
-    }else if (target.style.backgroundColor === 'yellow')  {
-      target.style.backgroundColor = 'lightgreen';
-      // "rgba(0,0,0, " + r_a + ")";
-    }
-
-    // (target.style.backgroundColor == "rgba(0,0,0, " + r_a + ")")
+    colorSwitch(target);
   });
 
-
-function tuna(that) {
-  console.log(that);
-  document.getElementById(that).setAttribute("style", "background-color: yellow;");
-}
-
   document.getElementById("single_div_1").addEventListener('click', function(){
-    document.getElementById("single_div_1").setAttribute("style", "background-color: yellow;");
+    let target = document.getElementById('single_div_1');
+    colorSwitch(target);
   });
 
   document.getElementById("single_div_2").addEventListener('click', function(){
@@ -71,22 +74,22 @@ function tuna(that) {
     document.getElementById("single_div_7").setAttribute("style", "background-color: yellow;");
   });
 
-  document.getElementById("single_div_8").addEventListener('click', function(){
-    document.getElementById("single_div_8").setAttribute("style", "background-color: yellow;");
-  });
+  // document.getElementById("single_div_8").addEventListener('click', function(){
+  //   document.getElementById("single_div_8").setAttribute("style", "background-color: yellow;");
+  // });
 
-  document.getElementById("single_div_9").addEventListener('click', function(){
-    document.getElementById("single_div_9").setAttribute("style", "background-color: yellow;");
-  });
+  // document.getElementById("single_div_9").addEventListener('click', function(){
+  //   document.getElementById("single_div_9").setAttribute("style", "background-color: yellow;");
+  // });
 
-  document.getElementById("single_div_10").addEventListener('click', function(){
-    document.getElementById("single_div_10").setAttribute("style", "background-color: yellow;");
-  });
+  // document.getElementById("single_div_10").addEventListener('click', function(){
+  //   document.getElementById("single_div_10").setAttribute("style", "background-color: yellow;");
+  // });
 
 }
 
 window.onload = function(){
-  test();
+  asteroidMain();
 }
 
 
@@ -97,6 +100,11 @@ window.onload = function(){
 
 //Code the I used to test concepts. 
 
+//let r_a = 0.3;
+// "rgba(0,0,0, " + r_a + ")";
+// (target.style.backgroundColor == "rgba(0,0,0, " + r_a + ")")
+
+//let target = document.getElementById('single_div_0').className;
 
 // onmouseover='changeColor();' 
 
