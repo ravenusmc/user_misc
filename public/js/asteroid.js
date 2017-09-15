@@ -9,12 +9,24 @@ function colorSwitch(target) {
   }
 } 
 
-function test() {
+function test(dataLength) {
  // var children = document.getElementById('parent_div').childNodes;
  // console.log(children[1].id);
- debugger;
-  let target = document.querySelector('.asteroid_data_container').id;
-  console.log(target);
+
+ //debugger;
+
+ id_array = [];
+
+  for (var i = 0; i < dataLength; i++){
+    var target = document.querySelector('#single_div_' + i).id;
+    id_array.push(target);
+  }
+
+  //[1, 2, 3].includes(2);
+  
+
+
+
  // onclick='test();'
 }
 
@@ -38,6 +50,8 @@ function asteroidMain(){
   let parsedData = JSON.parse(response);
 
   dataLength = parsedData.near_earth_objects[currentDate].length;
+
+  //test(dataLength);
 
 
   document.getElementById("single_div_0").addEventListener('click', function(){
