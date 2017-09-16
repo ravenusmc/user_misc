@@ -9,33 +9,13 @@ function colorSwitch(target) {
   }
 } 
 
-function test(elm) {
- // var children = document.getElementById('parent_div').childNodes;
- // console.log(children[1].id);
-
- //debugger;
+function changeBackground(elm) {
 
   if (elm.style.backgroundColor === 'lightgreen') {
     elm.style.backgroundColor = 'yellow'
   }else if (elm.style.backgroundColor === 'yellow')  {
     elm.style.backgroundColor = 'lightgreen';
   }
-
- //elm.style.backgroundColor = 'red';
-
- // id_array = [];
-
- //  for (var i = 0; i < dataLength; i++){
- //    var target = document.querySelector('#single_div_' + i).id;
- //    id_array.push(target);
- //  }
-
-  //[1, 2, 3].includes(2);
-
-
-
-
- // onclick='test();'
 }
 
 
@@ -58,55 +38,6 @@ function asteroidMain(){
   let parsedData = JSON.parse(response);
 
   dataLength = parsedData.near_earth_objects[currentDate].length;
-
-  //test(dataLength);
-
-
-  // document.getElementById("single_div_0").addEventListener('click', function(){
-  //   let target = document.getElementById('single_div_0');
-  //   colorSwitch(target);
-  // });
-
-  // document.getElementById("single_div_1").addEventListener('click', function(){
-  //   let target = document.getElementById('single_div_1');
-  //   colorSwitch(target);
-  // });
-
-  // document.getElementById("single_div_2").addEventListener('click', function(){
-  //   document.getElementById("single_div_2").setAttribute("style", "background-color: yellow;");
-  // });
-
-  // document.getElementById("single_div_3").addEventListener('click', function(){
-  //   document.getElementById("single_div_3").setAttribute("style", "background-color: yellow;");
-  // });
-
-  // document.getElementById("single_div_4").addEventListener('click', function(){
-  //   document.getElementById("single_div_4").setAttribute("style", "background-color: yellow;");
-  // });
-
-  // document.getElementById("single_div_5").addEventListener('click', function(){
-  //   document.getElementById("single_div_5").setAttribute("style", "background-color: yellow;");
-  // });
-
-  // document.getElementById("single_div_6").addEventListener('click', function(){
-  //   document.getElementById("single_div_6").setAttribute("style", "background-color: yellow;");
-  // });
-
-  // document.getElementById("single_div_7").addEventListener('click', function(){
-  //   document.getElementById("single_div_7").setAttribute("style", "background-color: yellow;");
-  // });
-
-  // document.getElementById("single_div_8").addEventListener('click', function(){
-  //   document.getElementById("single_div_8").setAttribute("style", "background-color: yellow;");
-  // });
-
-  // document.getElementById("single_div_9").addEventListener('click', function(){
-  //   document.getElementById("single_div_9").setAttribute("style", "background-color: yellow;");
-  // });
-
-  // document.getElementById("single_div_10").addEventListener('click', function(){
-  //   document.getElementById("single_div_10").setAttribute("style", "background-color: yellow;");
-  // });
 
 }
 
