@@ -1,27 +1,44 @@
 //This page will hold all of the JavaScript functions for the asteroid page. 
 
-//This function will toggle the colors from one color to another. 
-function colorSwitch(target) {
-  if (target.style.backgroundColor === 'lightgreen') {
-    target.style.backgroundColor = 'yellow'
-  }else if (target.style.backgroundColor === 'yellow')  {
-    target.style.backgroundColor = 'lightgreen';
-  }
-} 
+//Global Variables used throughout the project
+var modal = document.getElementById('simpleModal');
+var closeBtn = document.getElementsByClassName('closeBtn')[0];
 
+
+//This function will change the background of the container along with 
+//opening up the modal
 function changeBackground(elm) {
 
+  //Get model element
+  var modal = document.getElementById('simpleModal');
+  //get open modal button
+  var modalBtn = document.getElementById(elm);
+  //Close Button
+  var closeBtn = document.getElementById('closeBtn');
+
   if (elm.style.backgroundColor === 'lightgreen') {
-    elm.style.backgroundColor = 'yellow'
+    elm.style.backgroundColor = 'yellow';
+    openModal();
+    asteroidData();
   }else if (elm.style.backgroundColor === 'yellow')  {
     elm.style.backgroundColor = 'lightgreen';
   }
 }
 
+//Event listener to close the modal. 
+closeBtn.addEventListener('click', closeModal);
 
-//This function will be executed when the page loads and also has within it the event listener functions 
-//For when a user clicks. 
-function asteroidMain(){
+//This function opens the modal.
+function openModal() {
+  modal.style.display = 'block';
+}
+
+//This function closes the modal. 
+function closeModal(){
+  modal.style.display = 'none';
+}
+
+function asteroidData(){
 
   //Getting the current date 
   let currentDate = new Date();
@@ -39,13 +56,8 @@ function asteroidMain(){
 
   dataLength = parsedData.near_earth_objects[currentDate].length;
 
+  console.log(parsedData)
 }
-
-window.onload = function(){
-  asteroidMain();
-}
-
-
 
 
 
@@ -69,4 +81,13 @@ window.onload = function(){
 // function changeColor(){
 //   document.getElementById("single_div_1").setAttribute("style", "background-color: yellow;");
 // }
+
+//This function will toggle the colors from one color to another. 
+// function colorSwitch(target) {
+//   if (target.style.backgroundColor === 'lightgreen') {
+//     target.style.backgroundColor = 'yellow'
+//   }else if (target.style.backgroundColor === 'yellow')  {
+//     target.style.backgroundColor = 'lightgreen';
+//   }
+// } 
 

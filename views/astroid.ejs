@@ -21,14 +21,17 @@
     <% } %>
   </div>
 
+</main>
+
 <div id='simpleModal' class='Modal'>
   <div class="modal-content">
     <span class='closeBtn'>&times;</span>
-    <p>Hello, I'm a modal</p>
+    <h4>For more information on specific asteroid go to: </h4>
+     <% for (var i = 0; i < dataArray.length; i++) { %>
+      <p>Asteroid <%= i %> URL: </p>
+     <% } %>
   </div>
 </div>
-
-</main>
 
 
 
