@@ -28,7 +28,7 @@
     <span class='closeBtn'>&times;</span>
     <h4>For more information on specific asteroid go to: </h4>
      <% for (var i = 0; i < dataArray.length; i++) { %>
-      <p>Asteroid <%= i %> URL: </p>
+      <p>Asteroid <%= i %> URL: <%= dataArray[i].url %></p>
      <% } %>
   </div>
 </div>

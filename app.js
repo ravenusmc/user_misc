@@ -223,7 +223,7 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
         let rockName = parsedData.near_earth_objects[currentDate][i].name;
         let missDistance = parsedData.near_earth_objects[currentDate][i].close_approach_data[0].miss_distance.miles;
         let speed =  parsedData.near_earth_objects[currentDate][i].close_approach_data[0].relative_velocity.miles_per_hour;
-
+        let url = parsedData.near_earth_objects[currentDate][i].nasa_jpl_url;
         //The following code will bring the numbers down to 2 numbers past the decimal point. 
         size = asteroid.fixDecimal(size);
 
@@ -233,7 +233,7 @@ app.get('/asteroid', ensureAuthenticated, function(req, res){
         speed = asteroid.fixNumbers(speed);
 
         //I then push all of the variables into an array of objects to hold the data. 
-        dataArray.push({ rockSize: size, rockName: rockName, missDistance: missDistance, speed: speed });
+        dataArray.push({ rockSize: size, rockName: rockName, missDistance: missDistance, speed: speed, url: url });
       }
 
       //Rendering the page along with the data. 
