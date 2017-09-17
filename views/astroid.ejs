@@ -9,6 +9,7 @@
   <h1 class='center'>Near Earth Asteroids, Oh My!</h1>
   <h6 class='center'>(See Asteroids near Earth)</h6><br>
   <h3 class='center'>Today, on <%= date %>, the total number of near Earth bodies is: <%= bodies %></h3>
+  <h6 class='center'>Click on a box to learn more!</h6>
 
   <div id='parent_div' class='asteroid_main_div'>
     <% for (var i = 0; i < dataArray.length; i++) { %>
@@ -26,10 +27,13 @@
 <div id='simpleModal' class='Modal'>
   <div class="modal-content">
     <span class='closeBtn'>&times;</span>
-    <h4>For more information on specific asteroid go to: </h4>
-     <% for (var i = 0; i < dataArray.length; i++) { %>
-      <p>Asteroid <%= i %> URL: <%= dataArray[i].url %></p>
-     <% } %>
+    <h4 class='center'>For more information on a specific asteroid go to: </h4>
+    <br>
+      <div class='center'>
+        <% for (var i = 0; i < dataArray.length; i++) { %>
+          <p>Asteroid <%= dataArray[i].rockName %> URL: <a href='<%= dataArray[i].url %>'><%= dataArray[i].url %></a></p>
+        <% } %>
+     </div>
   </div>
 </div>
 

@@ -7,14 +7,6 @@ var closeBtn = document.getElementsByClassName('closeBtn')[0];
 //This function will change the background of the container along with 
 //opening up the modal
 function changeBackground(elm) {
-
-  //Get model element
-  var modal = document.getElementById('simpleModal');
-  //get open modal button
-  var modalBtn = document.getElementById(elm);
-  //Close Button
-  var closeBtn = document.getElementById('closeBtn');
-
   if (elm.style.backgroundColor === 'lightgreen') {
     elm.style.backgroundColor = 'yellow';
     openModal();
@@ -36,6 +28,8 @@ function closeModal(){
   modal.style.display = 'none';
 }
 
+
+//Keeping this function to help out with asteroid data on the Chrome Console.
 // function asteroidData(){
 
 //   //Getting the current date 
@@ -58,34 +52,4 @@ function closeModal(){
 // }
 
 
-
-
-
-//Code the I used to test concepts. 
-
-//let r_a = 0.3;
-// "rgba(0,0,0, " + r_a + ")";
-// (target.style.backgroundColor == "rgba(0,0,0, " + r_a + ")")
-
-//let target = document.getElementById('single_div_0').className;
-
-// onmouseover='changeColor();' 
-
-
-// function changeColor(){
-//   document.getElementById("single_div_0").setAttribute("style", "background-color: yellow;");
-// }
-
-// function changeColor(){
-//   document.getElementById("single_div_1").setAttribute("style", "background-color: yellow;");
-// }
-
-//This function will toggle the colors from one color to another. 
-// function colorSwitch(target) {
-//   if (target.style.backgroundColor === 'lightgreen') {
-//     target.style.backgroundColor = 'yellow'
-//   }else if (target.style.backgroundColor === 'yellow')  {
-//     target.style.backgroundColor = 'lightgreen';
-//   }
-// } 
 

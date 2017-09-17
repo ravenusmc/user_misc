@@ -1,3 +1,4 @@
+//The code in this file will handle all of the controllers to take the user around the site. 
 const request = require('request');
 const asteroid = require('../modules/asteroid');
 
@@ -8,7 +9,6 @@ module.exports.image = function(req, res){
   res.render('image', {
     errors: errors
   });
-
 };
 
 module.exports.home = function(req, res){
@@ -18,7 +18,6 @@ module.exports.home = function(req, res){
   res.render('home', {
     errors: errors
   });
-
 };
 
 module.exports.asteroid = function(req,res){
@@ -75,4 +74,4 @@ module.exports.asteroid = function(req,res){
       });
     }
   });
-}
+};

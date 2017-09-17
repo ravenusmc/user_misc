@@ -87,7 +87,7 @@ app.get('*', function(req,res,next){
 });
 
 
-//This route will take the user to the home page.
+//This route will take the user to the landing page.
 app.get('/', function(req, res){
 
   let errors = null;
