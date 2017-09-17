@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const router = express.Router();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
@@ -10,6 +11,7 @@ const config = require('./config/database');
 const passport = require('passport');
 const request = require('request');
 const asteroid = require('./modules/asteroid');
+const ctrlMain = require('./controllers/main');
 
 mongoose.connect(config.database);
 let db = mongoose.connection;
@@ -166,87 +168,12 @@ app.post('/sign_up', function(req, res){
   }
 });
 
-// https://api.nasa.gov/planetary/earth/imagery?lon=-83.968060&lat=34.089791&date=2017-02-01&cloud_score=True&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t
-
 //This will take the user to the home screen. 
-app.get('/home', ensureAuthenticated,  function(req,res){
-
-  // value = geoTest.test();
-  let errors = null;
-
-  res.render('home', {
-    errors: errors
-  });
-});
-
-//This route will take the user to the image page 
-app.get('/image', ensureAuthenticated, function(req, res){
-
-  let errors = null;
-  
-  res.render('image', {
-    errors: errors
-  });
-});
-
-//This route will take the user to the astroid page
-app.get('/asteroid', ensureAuthenticated, function(req, res){
-
-  //Variables used within this function
-  let errors = null;
-  let totalBodies = ""; //This variable will display the total number of bodies on the page
-
-  //This variable will hold the current date. 
-  let currentDate = asteroid.getDate(); 
-
-  request("https://api.nasa.gov/neo/rest/v1/feed?start_date=" + currentDate + "&end_date=" + currentDate + "&api_key=YVjqNFAtV4LbLUs9fXWTAYUW7YYkKwjALgTg3l0t", function(error, response, body){
-    if (!error && response.statusCode == 200){
-
-      //Parsing the data so that it may be read in JSON format. 
-      let parsedData = JSON.parse(body);
-      //Getting the total number of near Earth Asteroids on the specific day. 
-      let totalBodies = parsedData.element_count;
-
-      currentDate = asteroid.getDate();
-
-      //Need to loop through the data to get the asteroids name and size and miss distance. 
-
-      //This variable will hold the length of the json data.
-      dataLength = parsedData.near_earth_objects[currentDate].length;
-      let dataArray = [];
-
-      //Creating a for loop to loop through the data. 
-      for (var i = 0; i < dataLength; i++){
-
-        //These couple of lines will get the asteroid data that I want 
-        let size = parsedData.near_earth_objects[currentDate][i].estimated_diameter.meters.estimated_diameter_max;
-        let rockName = parsedData.near_earth_objects[currentDate][i].name;
-        let missDistance = parsedData.near_earth_objects[currentDate][i].close_approach_data[0].miss_distance.miles;
-        let speed =  parsedData.near_earth_objects[currentDate][i].close_approach_data[0].relative_velocity.miles_per_hour;
-        let url = parsedData.near_earth_objects[currentDate][i].nasa_jpl_url;
-        //The following code will bring the numbers down to 2 numbers past the decimal point. 
-        size = asteroid.fixDecimal(size);
-
-        //I am adding decimal points to my values. 
-        size = asteroid.fixNumbers(size);
-        missDistance = asteroid.fixNumbers(missDistance);
-        speed = asteroid.fixNumbers(speed);
-
-        //I then push all of the variables into an array of objects to hold the data. 
-        dataArray.push({ rockSize: size, rockName: rockName, missDistance: missDistance, speed: speed, url: url });
-      }
-
-      //Rendering the page along with the data. 
-      res.render('astroid', {
-        errors: errors,
-        bodies: totalBodies,
-        dataArray: dataArray,
-        date: currentDate
-      });
-    }
-  });
-
-});
+app.get('/home', ensureAuthenticated,  ctrlMain.home);
+//This will take the user to the image screen.
+app.get('/image', ensureAuthenticated, ctrlMain.image);
+//This will take the user to the asteroid page. 
+app.get('/asteroid', ensureAuthenticated, ctrlMain.asteroid);
 
 //This is code for the logout process
 app.get('/logout', function(req, res){
@@ -266,28 +193,10 @@ function ensureAuthenticated(req, res, next){
   }
 }
 
+module.exports = router;
+
 //Code to start server
 app.listen(3000, function(){
   console.log('Server Started, check port 3000');
 });
 
-
-// SCRAP CODE 
-
-  // let rightNow = new Date();
-  // rightNow = rightNow.toISOString().slice(0,10);
-  // rightNow = rightNow.split("-");
-  // //Here I am taking the date, converting it to a Number, subtracting one 
-  // //then turning it back into a string. 
-  // newDay = (Number(rightNow[2]) - 3).toString();
-  // //I combine 0 to the date because that is how the API has its data. 
-  // newDay = '0' + newDay;
-  // //I insert the modified date back into the array.
-  // rightNow[2] = newDay;
-  // //combine all the values back 
-  // date = rightNow.join('-');
-
-    //Getting the current date 
-  //let currentDate = new Date();
-  //Turning the current date into yyyy-mm-dd format
-  //currentDate = currentDate.toISOString().slice(0,10);
