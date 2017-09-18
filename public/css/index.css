@@ -224,7 +224,26 @@ span {
   cursor: pointer;
 }
 
+@media only all and (max-width: 1100px) {
 
+  .asteroid_main_div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    margin-top: 50px;
+  }
+}
+
+@media only all and (max-width: 768px){
+
+  .asteroid_main_div {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+    margin-top: 50px;
+  }
+
+}
 
 
 

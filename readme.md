@@ -24,7 +24,7 @@ Node packages used are Express, EJS.
 
 # Comments
   
-As I said above, this project did not have an official plan when I started it. However, it has morphed into something much better than I originally thought. I will say that I still need to work on somethings-like getting the routes out of the app.js file. 
+As I said above, this project did not have an official plan when I started it. However, it has morphed into something much better than I originally thought. 
 
 
 # Preview
