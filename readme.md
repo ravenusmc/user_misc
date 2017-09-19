@@ -20,7 +20,8 @@ This project will be another simple MEN stack project. I'm not 100% sure where i
 Node packages used are Express, EJS. 
 
 # Issues
-
+  
+No major issues at the moment. 
 
 # Comments
   
@@ -29,6 +30,6 @@ As I said above, this project did not have an official plan when I started it. H
 
 # Preview
 
-To see a video that talks about this project please go here: Coming Soon
+To see a video that talks about this project please go here: https://youtu.be/_DIxJRKApOg
 
-Blog entry: Coming Soon
+Blog entry: https://codingsaga.wordpress.com/2017/09/19/nasa-api-project/
